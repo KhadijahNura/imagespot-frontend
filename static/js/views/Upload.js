@@ -27,13 +27,15 @@ export default class extends AbstractView {
                 </div>
               </div>
               
-              <label for="description" class="label">Description</label>
+              <label for="description" class="label">Description (3-35 characters)</label>
               <textarea
                 type="text"
                 name="description"
                 id="description"
                 placeholder="Enter image description"
                 class="input-field"
+                maxlength="35"
+                minlength="3"
                 required
               ></textarea>
 

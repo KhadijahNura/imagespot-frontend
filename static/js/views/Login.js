@@ -26,6 +26,7 @@ export default class extends AbstractView {
                 id="username"
                 placeholder="Enter username"
                 class="input-field"
+                minlength="3"
                 required
               />
 
@@ -36,6 +37,7 @@ export default class extends AbstractView {
                 id="password"
                 placeholder="Enter password"
                 class="input-field"
+                minlength="3"
                 required
               />
 
