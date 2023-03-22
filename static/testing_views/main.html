@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 
+    - primary meta tags
+  -->
+    <title>Imagespot - Discover and Share Beautiful Images</title>
+    <meta
+      name="title"
+      content="Imagespot - Discover and Share Beautiful Images"
+    />
+    <meta
+      name="description"
+      content="Imagespot is an image sharing web app that allows you to upload, view, and share images with others"
+    />
+
+    <!-- 
+    - favicon
+  -->
+    <link rel="shortcut icon" href="../../favicon.svg" type="image/svg+xml" />
+
+    <!-- 
+    - google font link
+  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 
+    - custom css link
+  -->
+    <link rel="stylesheet" href="../css/require.css" />
+    <link rel="stylesheet" href="../css/pages/upload.css" />
+
+    <!-- 
+    - preload images
+  -->
+    <link rel="preload" href="../images/hero-img.svg" />
+  </head>
+
+  <body>
+    <!-- 
+    - #PRELOADER
+  -->
+
+    <div class="preloader" data-preloader>
+      <div class="preloader-circle"></div>
+    </div>
+
+    <!-- 
+    - #HEADER
+  -->
+
+    <header class="header" data-header>
+      <div class="container">
+        <a href="#" class="logo" data-link>
+          <img
+            src="../images/small-logo.svg"
+            width="151"
+            height="28"
+            alt="Imagespot logo"
+          />
+          <p class="sr-only">Go to home page</p>
+        </a>
+
+        <nav class="navbar" data-navbar>
+          <ul class="navbar-list">
+            <li class="navbar-item">
+              <a
+                href="/"
+                class="label-lg navbar-link has-after active"
+                data-link
+                >Home</a
+              >
+            </li>
+
+            <li class="navbar-item">
+              <a href="/images" class="label-lg navbar-link has-after" data-link
+                >Images</a
+              >
+            </li>
+
+            <li class="navbar-item">
+              <a href="/login" class="label-lg navbar-link has-after" data-link
+                >Login</a
+              >
+            </li>
+
+            <li class="navbar-item">
+              <a href="/signup" class="label-lg navbar-link has-after" data-link
+                >Sign Up</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <a href="/upload" class="btn btn-primary" data-link>Upload Image</a>
+
+        <button class="nav-toggle-btn" aria-label="menu" data-nav-toggler>
+          <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <article id="app">
+        <section
+          class="section upload has-bg-image"
+          aria-labelledby="uploaded images"
+          style="background-image: url('../images/image-bg.png')"
+        >
+          <div class="upload-container">
+            <form class="upload-form">
+              <h2 class="headline-sm" id="upload-label">Upload</h2>
+
+              <div class="file-area-container">
+                <div class="file-area">
+                  <input type="file" aria-label="Upload image" required>
+                  <p class="default">Drag your files here or click in this area.</p>
+                   <p class="success">File selected successfully</p>
+                </div>
+              </div>
+              
+              <label for="description" class="label">Description</label>
+              <textarea
+                type="text"
+                name="description"
+                id="description"
+                placeholder="Enter image description"
+                class="input-field"
+                required
+              ></textarea>
+
+
+              <button type="submit" class="btn btn-tertiary">Upload Image</a>
+            </form>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <!-- 
+    - #FOOTER
+  -->
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-center">&copy; 2022 copyright all right reserved</p>
+      </div>
+    </footer>
+
+    <!-- 
+    - custom js link
+  -->
+    <script>
+      /**
+       * Add eventListener on multiple elements
+       */
+
+      const addEventOnElements = function (elements, eventType, callback) {
+        for (let i = 0, len = elements.length; i < len; i++) {
+          elements[i].addEventListener(eventType, callback);
+        }
+      };
+
+      /**
+       * PRELOADER
+       */
+
+      const preloader = document.querySelector('[data-preloader]');
+
+      window.addEventListener('load', function () {
+        preloader.classList.add('loaded');
+        document.body.classList.add('loaded');
+      });
+
+      /**
+       * MOBILE NAV TOGGLE
+       */
+
+      const navbar = document.querySelector('[data-navbar]');
+      const navToggler = document.querySelector('[data-nav-toggler]');
+
+      const toggleNavbar = function () {
+        navbar.classList.toggle('active');
+      };
+
+      navToggler.addEventListener('click', toggleNavbar);
+
+      /**
+       * HEADER
+       *
+       * active header when window scrolled to 50px
+       */
+
+      const header = document.querySelector('[data-header]');
+
+      const activeHeader = function () {
+        window.scrollY > 50
+          ? header.classList.add('active')
+          : header.classList.remove('active');
+      };
+
+      window.addEventListener('scroll', activeHeader);
+    </script>
+
+    <!-- 
+    - ionicon
+  -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

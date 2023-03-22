@@ -1,0 +1,1 @@
+# Imagespot is an image sharing web app that allows users to upload, view, and share images with others. It aims to provide a platform for people to share and discover beautiful, interesting, and meaningful images, and could appeal to a wide range of users. The app includes features such as user accounts, image uploads, browsing, sharing.

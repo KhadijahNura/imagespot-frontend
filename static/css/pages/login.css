@@ -1,0 +1,100 @@
+/*-----------------------------------*\
+  #service.css
+\*-----------------------------------*/
+
+/**
+ * copyright 2022 codewithsadee
+ */
+
+/**
+ * TABLE OF CONTENT
+ *
+ * COMPONENTS
+ * Btn............................Buttons style
+ *
+ * MAIN CONTENT
+ * Contact........................Contact style
+ * Media queries..................Responsive for all devices
+ */
+
+/*-----------------------------------*\
+  #COMPONENTS
+\*-----------------------------------*/
+
+@import url('../components/btn.css');
+
+/*-----------------------------------*\
+  #LOGIN
+\*-----------------------------------*/
+
+.login {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding-block-start: calc(var(--section-padding) + 60px);
+}
+
+.login .container {
+  display: grid;
+  gap: 48px;
+}
+
+.login-form {
+  background-color: #fff;
+  box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem;
+  padding: 25px;
+  min-width: 50rem;
+}
+
+.login .label {
+  margin-block-end: 8px;
+}
+
+.input-field {
+  padding: 10px 12px;
+  border: 1px solid var(--jet);
+  margin-block-end: 24px;
+  outline: none;
+  transition: box-shadow var(--transition-1);
+}
+
+.input-field:focus {
+  box-shadow: inset 0 0 0 1px var(--jet);
+}
+
+/*-----------------------------------*\
+  #MEDIA QUERIES
+\*-----------------------------------*/
+
+/**
+ * responsive for large than 768px screen
+ */
+
+@media (min-width: 768px) {
+  .login-form {
+    padding: 35px;
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+/**
+ * responsive for large than 992px screen
+ */
+
+@media (min-width: 992px) {
+  .login .container {
+    grid-template-columns: 1fr 0.9fr;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .login-content {
+    width: 70%;
+    margin-inline: auto;
+  }
+}
