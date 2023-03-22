@@ -92,7 +92,7 @@ textarea {
 \*-----------------------------------*/
 
 /**
- * responsive for large than 768px screen
+ * responsive for larger than 768px screen
  */
 
 @media (min-width: 768px) {
@@ -108,7 +108,7 @@ textarea {
 }
 
 /**
- * responsive for large than 992px screen
+ * responsive for larger than 992px screen
  */
 
 @media (min-width: 992px) {

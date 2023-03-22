@@ -1,5 +1,5 @@
 /*-----------------------------------*\
-  #CUSTOM PROPERTY
+  #CUSTOM PROPERTIES
 \*-----------------------------------*/
 
 :root {
@@ -240,7 +240,7 @@ body.loaded {
 }
 
 /*-----------------------------------*\
-  #REUSED STYLE
+  #REUSED STYLES
 \*-----------------------------------*/
 
 .container {
@@ -553,7 +553,7 @@ footer {
 \*-----------------------------------*/
 
 /**
- * responsive for large than 575px screen
+ * responsive for larger than 575px screen
  */
 
 @media (min-width: 575px) {
@@ -563,7 +563,7 @@ footer {
 }
 
 /**
- * responsive for large than 768px screen
+ * responsive for larger than 768px screen
  */
 
 @media (min-width: 768px) {
@@ -611,7 +611,7 @@ footer {
 }
 
 /**
- * responsive for large than 992px screen
+ * responsive for larger than 992px screen
  */
 
 @media (min-width: 992px) {
@@ -690,7 +690,7 @@ footer {
 }
 
 /**
- * responsive for large than 1200px screen
+ * responsive for larger than 1200px screen
  */
 
 @media (min-width: 1200px) {

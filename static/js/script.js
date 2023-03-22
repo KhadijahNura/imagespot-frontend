@@ -166,10 +166,7 @@ function showToast(text, isSuccess) {
 }
 
 window.onload = function () {
-  /**
-   * MOBILE NAV TOGGLE
-   */
-
+  // mobile nav toggle
   const navbar = document.querySelector('[data-navbar]');
   const navToggler = document.querySelector('[data-nav-toggler]');
 
@@ -179,12 +176,7 @@ window.onload = function () {
 
   navToggler.addEventListener('click', toggleNavbar);
 
-  /**
-   * HEADER
-   *
-   * active header when window scrolled to 50px
-   */
-
+  // set header to active on scroll
   const header = document.querySelector('[data-header]');
 
   const activeHeader = function () {
