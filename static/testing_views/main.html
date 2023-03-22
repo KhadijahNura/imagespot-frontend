@@ -37,7 +37,8 @@
     - custom css link
   -->
     <link rel="stylesheet" href="../css/require.css" />
-    <link rel="stylesheet" href="../css/pages/upload.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/pages/notfound.css" />
 
     <!-- 
     - preload images
@@ -111,36 +112,13 @@
 
     <main>
       <article id="app">
-        <section
-          class="section upload has-bg-image"
-          aria-labelledby="uploaded images"
-          style="background-image: url('../images/image-bg.png')"
-        >
-          <div class="upload-container">
-            <form class="upload-form">
-              <h2 class="headline-sm" id="upload-label">Upload</h2>
-
-              <div class="file-area-container">
-                <div class="file-area">
-                  <input type="file" aria-label="Upload image" required>
-                  <p class="default">Drag your files here or click in this area.</p>
-                   <p class="success">File selected successfully</p>
-                </div>
-              </div>
-              
-              <label for="description" class="label">Description</label>
-              <textarea
-                type="text"
-                name="description"
-                id="description"
-                placeholder="Enter image description"
-                class="input-field"
-                required
-              ></textarea>
-
-
-              <button type="submit" class="btn btn-tertiary">Upload Image</a>
-            </form>
+        <section class="section not-found" aria-labelledby="not found">
+          <div class="not-found-container">
+            <img src="../images/hero-img.svg" alt="" />
+            <p>The page you're looking for does not exist</p>
+            <a href="/" class="btn btn-primary" data-link
+              >Go back to home page</a
+            >
           </div>
         </section>
       </article>

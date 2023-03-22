@@ -1,25 +1,4 @@
 /*-----------------------------------*\
-  #require.css
-\*-----------------------------------*/
-
-/**
- * copyright 2022 codewithsadee
- */
-
-/**
- * TABLE OF CONTENT
- *
- * Custom properties..............Global variables
- * Reset..........................Removed browser default style
- * Typography.....................Typography style
- * Reused.........................Reused classes
- * Preloader......................Preload style
- * Header.........................Header style
- * Footer.........................Footer style
- * Media queries..................Responsive for all devices
- */
-
-/*-----------------------------------*\
   #CUSTOM PROPERTY
 \*-----------------------------------*/
 
@@ -126,6 +105,7 @@ a {
 
 img {
   height: auto;
+  max-width: 100vw;
 }
 
 input,
@@ -451,7 +431,7 @@ body.loaded {
   #FOOTER
 \*-----------------------------------*/
 
-.footer {
+footer {
   background-color: var(--jet);
   color: var(--white_a75);
   border-block-start: 1px solid var(--white_a10);
@@ -524,18 +504,14 @@ body.loaded {
    * FOOTER
    */
 
-  .footer {
+  footer {
     padding-block: 25px;
   }
 
-  .footer .container {
+  footer .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-
-  .social-list {
-    margin-block-end: 0;
   }
 }
 

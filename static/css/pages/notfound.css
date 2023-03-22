@@ -1,0 +1,29 @@
+.not-found {
+  min-height: 100dvh;
+  padding-block-start: calc(var(--section-padding) + 60px);
+  display: grid;
+  place-items: center;
+}
+
+.not-found-container {
+  display: grid;
+  place-items: center;
+}
+
+.not-found img {
+  margin-block: 3rem;
+}
+
+.not-found p,
+.not-found a {
+  text-align: center;
+}
+
+.not-found p {
+  font-size: large;
+  font-weight: bold;
+}
+
+.not-found a {
+  margin-top: 2rem;
+}

@@ -1,26 +1,3 @@
-/*-----------------------------------*\
-  #service.css
-\*-----------------------------------*/
-
-/**
- * copyright 2022 codewithsadee
- */
-
-/**
- * TABLE OF CONTENT
- *
- * COMPONENTS
- * Btn............................Buttons style
- *
- * MAIN CONTENT
- * Contact........................Contact style
- * Media queries..................Responsive for all devices
- */
-
-/*-----------------------------------*\
-  #COMPONENTS
-\*-----------------------------------*/
-
 @import url('../components/btn.css');
 
 /*-----------------------------------*\
@@ -43,7 +20,7 @@
   background-color: #fff;
   box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem;
   padding: 25px;
-  min-width: 50rem;
+  width: min(80vw, 40rem);
 }
 
 .login .label {
