@@ -13,7 +13,7 @@ export default class extends AbstractView {
         <section
           class="section upload has-bg-image"
           aria-labelledby="uploaded images"
-          style="background-image: url('../images/image-bg.png')"
+          style="background-image: url('./static/images/image-bg.png')"
         >
           <div class="upload-container">
             <form class="upload-form">

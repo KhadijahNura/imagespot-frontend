@@ -13,7 +13,7 @@ export default class extends AbstractView {
         <section
           class="section images-section has-bg-image"
           aria-labelledby="uploaded images"
-          style="background-image: url('../images/image-bg.png')"
+          style="background-image: url('./static/images/image-bg.png')"
         >
           <div class="container">
             <h2 class="sr-only">Images</h2>
