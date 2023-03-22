@@ -59,6 +59,62 @@ function signup() {
   });
 }
 
+async function uploadImage() {
+  let fileInput = document.getElementById('image_input_field');
+  let description = document.getElementById('description').value;
+
+  let file = fileInput.files[0];
+
+  if (typeof FileReader !== 'undefined') {
+    let filesize = file.size;
+
+    if (filesize > 10 * 1024 * 1024)
+      return showToast('Image must be less than 10mb', false);
+  }
+
+  let formData = new FormData();
+  formData.append('image', file);
+
+  if (!file) return showToast('Please select image', false);
+  if (!description) return showToast('Please enter description', false);
+
+  if (description.length < 3)
+    return showToast('Description must be at least 3 characters long', false);
+
+  try {
+    document.querySelector('.loader').classList.add('loading');
+
+    const imageResponse = await $.ajax({
+      url: 'http://localhost:5000/images',
+      type: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
+      },
+      data: formData,
+      processData: false,
+      contentType: false,
+    });
+
+    await $.ajax({
+      url: `http://localhost:5000/images/${imageResponse.id}`,
+      type: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
+      },
+      data: JSON.stringify({ description: description }),
+      contentType: 'application/json',
+      dataType: 'json',
+    });
+
+    document.querySelector('.loader').classList.add('loading');
+
+    showToast('Upload Successful', true);
+    window.manualRoute('/images');
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 function showToast(text, isSuccess) {
   let toast = document.querySelector('.toast');
   let toastBottomBar = document.querySelector('.bottom-bar');

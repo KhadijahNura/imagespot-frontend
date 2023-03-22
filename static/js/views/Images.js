@@ -21,8 +21,6 @@ export default class extends AbstractView {
             </div>
           </div>
         </section>
-
-        <script src="static/js/scripts/images.js"></script>
     `;
   }
 }
