@@ -22,8 +22,8 @@ export default class extends AbstractView {
               <div class="file-area-container">
                 <div class="file-area">
                   <input type="file" aria-label="Upload image" required>
-                  <p class="default">Drag your files here or click in this area.</p>
-                   <p class="success">File selected successfully</p>
+                  <p class="default">Drag image here or click in this area.</p>
+                  <p class="success">File selected successfully</p>
                 </div>
               </div>
               

@@ -62,6 +62,7 @@ const handleLocation = async () => {
     };
 
   const view = new match.route.view();
+
   document.getElementById('app').innerHTML = await view.getHTML();
 
   setCorrectLinkActive();
@@ -71,9 +72,9 @@ const handleLocation = async () => {
 window.onpopstate = handleLocation;
 window.route = route;
 
-document.addEventListener('DOMContentLoaded', (e) => {
+document.addEventListener('DOMContentLoaded', () => {
   // changing the default behaviour of links on the pages
-  document.body.addEventListener('click', (e) => {
+  document.body.addEventListener('click', async (e) => {
     if (e.target.matches('[data-link]')) {
       e.preventDefault();
       route(e);
