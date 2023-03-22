@@ -44,8 +44,6 @@ const setCorrectLinkActive = () => {
       navbarLink.classList.add('active');
     else if (location.pathname === '/signup' && navbarLink.id === 'signup-link')
       navbarLink.classList.add('active');
-    else if (location.pathname === '/upload' && navbarLink.id === 'images-link')
-      navbarLink.classList.add('active');
   });
 };
 

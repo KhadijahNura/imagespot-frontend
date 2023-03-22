@@ -27,3 +27,15 @@
 .not-found a {
   margin-top: 2rem;
 }
+
+@media (min-width: 30rem) {
+  .not-found img {
+    width: 20rem;
+  }
+}
+
+@media (min-width: 50rem) {
+  .not-found img {
+    width: 35rem;
+  }
+}
