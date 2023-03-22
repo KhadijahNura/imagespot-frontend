@@ -8,8 +8,6 @@ export default class extends AbstractView {
 
   async getHTML() {
     return `
-        <link rel="stylesheet" href="./static/css/main.css" />
-
         <section class="section hero" aria-label="home">
           <div class="container">
             <div class="hero-content">

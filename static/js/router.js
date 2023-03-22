@@ -63,7 +63,14 @@ const handleLocation = async () => {
 
   const view = new match.route.view();
 
+  document.getElementById('app').style.visibility = 'hidden';
+
   document.getElementById('app').innerHTML = await view.getHTML();
+
+  setTimeout(
+    () => (document.getElementById('app').style.visibility = 'visible'),
+    250
+  );
 
   setCorrectLinkActive();
 };
