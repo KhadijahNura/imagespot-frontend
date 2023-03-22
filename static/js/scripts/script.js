@@ -115,6 +115,23 @@ async function uploadImage() {
   }
 }
 
+async function searchImages() {
+  const searchQuery = document.getElementById('search').value;
+  const images = window.images;
+  let result = [];
+
+  if (searchQuery !== '') {
+    images.forEach((image) => {
+      if (image.description.toLowerCase().includes(searchQuery)) {
+        result.push(image);
+      }
+    });
+    await window.setupImagesPage(result);
+  } else {
+    await window.setupImagesPage(images);
+  }
+}
+
 function showToast(text, isSuccess) {
   let toast = document.querySelector('.toast');
   let toastBottomBar = document.querySelector('.bottom-bar');

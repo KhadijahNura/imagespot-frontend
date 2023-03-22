@@ -93,11 +93,6 @@ const handleLocation = async () => {
   setCorrectLinkActive();
 };
 
-// routing when the user navigates through history
-window.onpopstate = handleLocation;
-window.route = route;
-window.manualRoute = manualRoute;
-
 document.addEventListener('DOMContentLoaded', () => {
   // changing the default behaviour of links on the pages
   document.body.addEventListener('click', async (e) => {
@@ -149,65 +144,9 @@ async function fetchImages() {
       dataType: 'json',
     });
 
-    for (let i = 0; i < images.length; i++) {
-      const image = images[i];
+    window.images = images;
 
-      const card = document.createElement('div');
-      card.classList.add('card');
-
-      const cardImageContainer = document.createElement('div');
-      cardImageContainer.classList.add('card-image-container');
-
-      const cardImage = document.createElement('img');
-      cardImage.classList.add('card__image');
-      cardImage.src = `http://localhost:5000/${image.image_url}`;
-      cardImage.alt = image.description;
-
-      const cardImageOverlay = document.createElement('div');
-      cardImageOverlay.classList.add('card__image-overlay');
-
-      const cardBtn = document.createElement('btn');
-      cardBtn.onclick = () =>
-        downloadURI('http://localhost:5000/' + image.image_url);
-      cardBtn.innerText = 'Download';
-      cardBtn.classList.add('card-btn');
-
-      cardImageContainer.append(cardImage, cardImageOverlay, cardBtn);
-
-      const cardContent = document.createElement('div');
-      cardContent.classList.add('card__content');
-
-      const cardContentFirstDesc = document.createElement('p');
-      const cardContentFirstSubtitle = document.createElement('span');
-
-      cardContentFirstSubtitle.classList.add('card__content-title');
-      cardContentFirstSubtitle.innerText = 'Description: ';
-      cardContentFirstDesc.innerHTML = `${cardContentFirstSubtitle.outerHTML} ${image.description}`;
-
-      const cardContentSecondDesc = document.createElement('p');
-      const cardContentSecondSubtitle = document.createElement('span');
-
-      cardContentSecondSubtitle.classList.add('card__content-title');
-      cardContentSecondSubtitle.innerText = 'Author: ';
-      cardContentSecondDesc.innerHTML = `${cardContentSecondSubtitle.outerHTML} ${image.author_data.username}`;
-
-      cardContent.append(cardContentFirstDesc, cardContentSecondDesc);
-
-      const cardInfo = document.createElement('div');
-      cardInfo.classList.add('card__info');
-
-      const cardInfoLink = document.createElement('a');
-      cardInfoLink.classList.add('card__link');
-      cardInfoLink.target = '_blank';
-      cardInfoLink.href = `http://localhost:5000/${image.image_url}`;
-      cardInfoLink.innerText = 'View';
-
-      cardInfo.appendChild(cardInfoLink);
-      card.append(cardImageContainer, cardContent, cardInfo);
-
-      document.querySelector('.image-cards-container').appendChild(card);
-    }
-    // document.querySelector('.loader').classList.remove('loading');
+    await setupImagesPage(images);
   } catch (err) {
     document.querySelector('.loader').classList.remove('loading');
     showToast('An error occured', false);
@@ -222,12 +161,86 @@ function downloadURI(uri) {
       const a = document.createElement('a');
       a.style.display = 'none';
       a.href = url;
-      // the filename you want
       a.download = 'image';
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
       showToast('Image successfully downloaded', true);
     })
-    .catch((err) => showToast('An error occurred', false));
+    .catch(() => showToast('An error occurred', false));
 }
+
+async function setupImagesPage(images) {
+  const imagesCardContainer = document.querySelector('.image-cards-container');
+  imagesCardContainer.innerHTML = '';
+
+  if (images.length === 0) {
+    imagesCardContainer.innerText = 'No images found';
+    return;
+  }
+
+  for (let i = 0; i < images.length; i++) {
+    const image = images[i];
+
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    const cardImageContainer = document.createElement('div');
+    cardImageContainer.classList.add('card-image-container');
+
+    const cardImage = document.createElement('img');
+    cardImage.classList.add('card__image');
+    cardImage.src = `http://localhost:5000/${image.image_url}`;
+    cardImage.alt = image.description;
+
+    const cardImageOverlay = document.createElement('div');
+    cardImageOverlay.classList.add('card__image-overlay');
+
+    const cardBtn = document.createElement('btn');
+    cardBtn.onclick = () =>
+      downloadURI('http://localhost:5000/' + image.image_url);
+    cardBtn.innerText = 'Download';
+    cardBtn.classList.add('card-btn');
+
+    cardImageContainer.append(cardImage, cardImageOverlay, cardBtn);
+
+    const cardContent = document.createElement('div');
+    cardContent.classList.add('card__content');
+
+    const cardContentFirstDesc = document.createElement('p');
+    const cardContentFirstSubtitle = document.createElement('span');
+
+    cardContentFirstSubtitle.classList.add('card__content-title');
+    cardContentFirstSubtitle.innerText = 'Description: ';
+    cardContentFirstDesc.innerHTML = `${cardContentFirstSubtitle.outerHTML} ${image.description}`;
+
+    const cardContentSecondDesc = document.createElement('p');
+    const cardContentSecondSubtitle = document.createElement('span');
+
+    cardContentSecondSubtitle.classList.add('card__content-title');
+    cardContentSecondSubtitle.innerText = 'Author: ';
+    cardContentSecondDesc.innerHTML = `${cardContentSecondSubtitle.outerHTML} ${image.author_data.username}`;
+
+    cardContent.append(cardContentFirstDesc, cardContentSecondDesc);
+
+    const cardInfo = document.createElement('div');
+    cardInfo.classList.add('card__info');
+
+    const cardInfoLink = document.createElement('a');
+    cardInfoLink.classList.add('card__link');
+    cardInfoLink.target = '_blank';
+    cardInfoLink.href = `http://localhost:5000/${image.image_url}`;
+    cardInfoLink.innerText = 'View';
+
+    cardInfo.appendChild(cardInfoLink);
+    card.append(cardImageContainer, cardContent, cardInfo);
+
+    imagesCardContainer.appendChild(card);
+  }
+}
+
+// routing when the user navigates through history
+window.onpopstate = handleLocation;
+window.route = route;
+window.manualRoute = manualRoute;
+window.setupImagesPage = setupImagesPage;

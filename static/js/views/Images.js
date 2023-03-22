@@ -17,6 +17,12 @@ export default class extends AbstractView {
         >
           <div class="container">
             <h2 class="sr-only">Images</h2>
+            <div class="search-form-container">
+              <form class="search-form" onsubmit="event.preventDefault(); searchImages();">
+                <input type="text" id="search" oninput="searchImages();" class="search-input" placeholder="Search for image" />
+                <button type="submit" class="search-btn">Search</button>
+              </form>
+            </div>
             <div class="cards image-cards-container">
             </div>
           </div>
