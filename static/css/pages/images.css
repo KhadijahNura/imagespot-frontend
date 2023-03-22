@@ -51,8 +51,28 @@
   transition: scale 0.2s ease-out;
 }
 
+.card-btn {
+  position: absolute;
+  top: 45%;
+  transform: translateX(100%);
+  border-radius: 0.5rem;
+  color: antiquewhite;
+  background-color: var(--orange-red);
+  padding: 1rem 1.5rem;
+  display: none;
+  cursor: pointer;
+}
+
 .card:hover {
   scale: 1.05;
+}
+
+.card:hover .card__image-overlay {
+  opacity: 0.5;
+}
+
+.card:hover .card-btn {
+  display: block;
 }
 
 .card__content-title {
@@ -60,6 +80,18 @@
   font-weight: bold;
   font-size: 1.4rem;
   margin-top: 10px;
+}
+
+.card-image-container {
+  position: relative;
+}
+
+.card__image-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: black;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .card__image {

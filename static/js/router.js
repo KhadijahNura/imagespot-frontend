@@ -82,7 +82,7 @@ const handleLocation = async () => {
   document.getElementById('app').innerHTML = await view.getHTML();
 
   if (path === '/images') {
-    fetchImages();
+    await fetchImages();
   }
 
   setTimeout(() => {
@@ -137,32 +137,6 @@ async function isAuthenticated() {
   }
 }
 
-{
-  /* <div class="card">
-  <img
-    class="card__image"
-    src="https://fakeimg.pl/400x300/009578/fff/"
-    alt="shared image"
-  />
-  <div class="card__content" aria-label="Image description">
-    <p>
-      <span class="card__content-title">Description:</span> Lorem ipsum dolor
-      sit amet consectetur adipisicing elit. Eos ducimus id ab tenetur delectus
-      reiciendis fugit autem qui at.
-    </p>
-    <p>
-      <span class="card__content-title">Author:</span>
-      Leeyah
-    </p>
-  </div>
-  <div class="card__info">
-    <a href="/images" class="card__link" data-link>
-      View
-    </a>
-  </div>
-</div>; */
-}
-
 // populating image section
 async function fetchImages() {
   try {
@@ -181,10 +155,24 @@ async function fetchImages() {
       const card = document.createElement('div');
       card.classList.add('card');
 
+      const cardImageContainer = document.createElement('div');
+      cardImageContainer.classList.add('card-image-container');
+
       const cardImage = document.createElement('img');
       cardImage.classList.add('card__image');
       cardImage.src = `http://localhost:5000/${image.image_url}`;
       cardImage.alt = image.description;
+
+      const cardImageOverlay = document.createElement('div');
+      cardImageOverlay.classList.add('card__image-overlay');
+
+      const cardBtn = document.createElement('btn');
+      cardBtn.onclick = () =>
+        downloadURI('http://localhost:5000/' + image.image_url);
+      cardBtn.innerText = 'Download';
+      cardBtn.classList.add('card-btn');
+
+      cardImageContainer.append(cardImage, cardImageOverlay, cardBtn);
 
       const cardContent = document.createElement('div');
       cardContent.classList.add('card__content');
@@ -213,18 +201,33 @@ async function fetchImages() {
       cardInfoLink.target = '_blank';
       cardInfoLink.href = `http://localhost:5000/${image.image_url}`;
       cardInfoLink.innerText = 'View';
-      // cardInfoLink.setAttribute('download', true)
 
       cardInfo.appendChild(cardInfoLink);
-      card.append(cardImage, cardContent, cardInfo);
+      card.append(cardImageContainer, cardContent, cardInfo);
 
       document.querySelector('.image-cards-container').appendChild(card);
     }
-
-    document.querySelector('.loader').classList.remove('loading');
+    // document.querySelector('.loader').classList.remove('loading');
   } catch (err) {
     document.querySelector('.loader').classList.remove('loading');
     showToast('An error occured', false);
-    console.log(err);
   }
+}
+
+function downloadURI(uri) {
+  fetch(uri)
+    .then((resp) => resp.blob())
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      // the filename you want
+      a.download = 'image';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      showToast('Image successfully downloaded', true);
+    })
+    .catch((err) => showToast('An error occurred', false));
 }
