@@ -166,7 +166,7 @@ async function isAuthenticated() {
 // populating image section
 async function fetchImages() {
   try {
-    document.querySelector('.loader').classList.add(loading);
+    document.querySelector('.loader').classList.add('loading');
 
     const images = await $.ajax({
       url: 'http://localhost:5000/images',
@@ -210,6 +210,7 @@ async function fetchImages() {
 
       const cardInfoLink = document.createElement('a');
       cardInfoLink.classList.add('card__link');
+      cardInfoLink.target = '_blank';
       cardInfoLink.href = `http://localhost:5000/${image.image_url}`;
       cardInfoLink.innerText = 'View';
       // cardInfoLink.setAttribute('download', true)
@@ -220,9 +221,9 @@ async function fetchImages() {
       document.querySelector('.image-cards-container').appendChild(card);
     }
 
-    document.querySelector('.loader').classList.remove(loading);
+    document.querySelector('.loader').classList.remove('loading');
   } catch (err) {
-    document.querySelector('.loader').classList.remove(loading);
+    document.querySelector('.loader').classList.remove('loading');
     showToast('An error occured', false);
     console.log(err);
   }
