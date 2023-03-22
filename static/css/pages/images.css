@@ -145,6 +145,7 @@
 .search-form {
   display: flex;
   gap: 2rem;
+  z-index: 5;
 }
 
 .search-input {
