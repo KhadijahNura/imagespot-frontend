@@ -87,14 +87,6 @@ textarea {
   display: inline;
 }
 
-/*-----------------------------------*\
-  #MEDIA QUERIES
-\*-----------------------------------*/
-
-/**
- * responsive for larger than 768px screen
- */
-
 @media (min-width: 768px) {
   .upload-form {
     padding: 35px;
@@ -106,10 +98,6 @@ textarea {
     gap: 20px;
   }
 }
-
-/**
- * responsive for larger than 992px screen
- */
 
 @media (min-width: 992px) {
   .container {
