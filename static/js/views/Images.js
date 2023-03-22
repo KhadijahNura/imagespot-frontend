@@ -17,30 +17,7 @@ export default class extends AbstractView {
         >
           <div class="container">
             <h2 class="sr-only">Images</h2>
-            <div class="cards">
-
-              <div class="card">
-                <img
-                  class="card__image"
-                  src="https://fakeimg.pl/400x300/009578/fff/"
-                  alt="shared image"
-                />
-                <div class="card__content" aria-label="Image description">
-                  <p>
-                    <span class="card__content-title">Description:</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-                    ducimus id ab tenetur delectus reiciendis fugit autem qui
-                    at.
-                  </p>
-                  <p>
-                    <span class="card__content-title">Author:</span>
-                    Leeyah
-                  </p>
-                </div>
-                <div class="card__info">
-                  <a href="/images" class="card__link" data-link>View</a>
-                </div>
-              </div>
-
+            <div class="cards image-cards-container">
             </div>
           </div>
         </section>

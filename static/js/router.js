@@ -81,6 +81,10 @@ const handleLocation = async () => {
 
   document.getElementById('app').innerHTML = await view.getHTML();
 
+  if (path === '/images') {
+    fetchImages();
+  }
+
   setTimeout(() => {
     document.getElementById('app').style.visibility = 'visible';
     document.querySelector('.loader').classList.remove('loading');
@@ -130,5 +134,91 @@ async function isAuthenticated() {
     return true;
   } catch (err) {
     return false;
+  }
+}
+
+{
+  /* <div class="card">
+  <img
+    class="card__image"
+    src="https://fakeimg.pl/400x300/009578/fff/"
+    alt="shared image"
+  />
+  <div class="card__content" aria-label="Image description">
+    <p>
+      <span class="card__content-title">Description:</span> Lorem ipsum dolor
+      sit amet consectetur adipisicing elit. Eos ducimus id ab tenetur delectus
+      reiciendis fugit autem qui at.
+    </p>
+    <p>
+      <span class="card__content-title">Author:</span>
+      Leeyah
+    </p>
+  </div>
+  <div class="card__info">
+    <a href="/images" class="card__link" data-link>
+      View
+    </a>
+  </div>
+</div>; */
+}
+
+// populating image section
+async function fetchImages() {
+  try {
+    const images = await $.ajax({
+      url: 'http://localhost:5000/images',
+      type: 'GET',
+      contentType: 'application/json',
+      dataType: 'json',
+    });
+
+    for (let i = 0; i < images.length; i++) {
+      const image = images[i];
+
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      const cardImage = document.createElement('img');
+      cardImage.classList.add('card__image');
+      cardImage.src = `http://localhost:5000/${image.image_url}`;
+      cardImage.alt = image.description;
+
+      const cardContent = document.createElement('div');
+      cardContent.classList.add('card__content');
+
+      const cardContentFirstDesc = document.createElement('p');
+      const cardContentFirstSubtitle = document.createElement('span');
+
+      cardContentFirstSubtitle.classList.add('card__content-title');
+      cardContentFirstSubtitle.innerText = 'Description: ';
+      cardContentFirstDesc.innerHTML = `${cardContentFirstSubtitle.outerHTML} ${image.description}`;
+
+      const cardContentSecondDesc = document.createElement('p');
+      const cardContentSecondSubtitle = document.createElement('span');
+
+      cardContentSecondSubtitle.classList.add('card__content-title');
+      cardContentSecondSubtitle.innerText = 'Author: ';
+      cardContentSecondDesc.innerHTML = `${cardContentSecondSubtitle.outerHTML} ${image.author_data.username}`;
+
+      cardContent.append(cardContentFirstDesc, cardContentSecondDesc);
+
+      const cardInfo = document.createElement('div');
+      cardInfo.classList.add('card__info');
+
+      const cardInfoLink = document.createElement('a');
+      cardInfoLink.classList.add('card__link');
+      cardInfoLink.href = `http://localhost:5000/${image.image_url}`;
+      cardInfoLink.innerText = 'View';
+      // cardInfoLink.setAttribute('download', true)
+
+      cardInfo.appendChild(cardInfoLink);
+      card.append(cardImage, cardContent, cardInfo);
+
+      document.querySelector('.image-cards-container').appendChild(card);
+    }
+  } catch (err) {
+    showToast('An error occured', false);
+    console.log(err);
   }
 }

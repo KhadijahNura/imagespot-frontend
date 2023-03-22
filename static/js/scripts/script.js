@@ -91,7 +91,6 @@ function showToast(text, isSuccess) {
 }
 
 window.onload = function () {
-  // showToast('Wee', true);
   /**
    * Add eventListener on multiple elements
    */
@@ -130,4 +129,5 @@ window.onload = function () {
   };
 
   window.addEventListener('scroll', activeHeader);
+  window.showToast = showToast;
 };
