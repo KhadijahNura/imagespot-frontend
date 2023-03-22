@@ -96,8 +96,26 @@
       </div>
     </header>
 
+    <!-- Toast notification -->
+    <aside>
+      <div class="toast">
+        <div class="toast__content">
+          <ion-icon
+            name="checkmark-done-circle-outline"
+            class="success-icon hidden"
+          ></ion-icon>
+          <ion-icon name="alert-outline" class="error-icon"></ion-icon>
+          <span class="toast-text"></span>
+        </div>
+
+        <div class="bottom-bar"></div>
+      </div>
+    </aside>
+
     <main style="min-height: 100dvh">
+      <!-- For screen readers -->
       <h1 class="sr-only">Imagespot</h1>
+
       <article>
         <div class="loader">
           <div class="circles">
@@ -118,10 +136,11 @@
     </footer>
 
     <!-- 
-    - custom js link
+    - custom js links
   -->
-    <script src="static/js/router.js" type="module"></script>
     <script src="static/js/scripts/script.js"></script>
+    <script src="static/js/router.js" type="module"></script>
+    <script src="static/js/scripts/login.js"></script>
 
     <!-- 
     - ionicon

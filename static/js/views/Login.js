@@ -16,7 +16,7 @@ export default class extends AbstractView {
           style="background-image: url('./static/images/image-bg.png')"
         >
           <div class="login-container">
-            <form action="" class="login-form">
+            <form onsubmit="event.preventDefault(); login();" class="login-form">
               <h2 class="headline-sm" id="login-label">Login</h2>
 
               <label for="username" class="label">Username</label>
@@ -29,17 +29,17 @@ export default class extends AbstractView {
                 required
               />
 
-              <label for="username" class="label">Password</label>
+              <label for="password" class="label">Password</label>
               <input
-                type="text"
-                name="username"
-                id="username"
+                type="password"
+                name="password"
+                id="password"
                 placeholder="Enter password"
                 class="input-field"
                 required
               />
 
-              <a href="#" class="btn btn-tertiary">Login</a>
+              <button type="submit" class="btn btn-tertiary">Login</button>
             </form>
           </div>
         </section>

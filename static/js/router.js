@@ -24,6 +24,11 @@ const route = (event) => {
   handleLocation();
 };
 
+const manualRoute = (path) => {
+  window.history.pushState({}, '', path);
+  handleLocation();
+};
+
 const setCorrectLinkActive = () => {
   const navbarLinks = document.querySelectorAll('.navbar-link');
   navbarLinks.forEach((navbarLink) => {
@@ -61,6 +66,14 @@ const handleLocation = async () => {
       result: [location.pathname],
     };
 
+  if (path === '/upload') {
+    const isLoggedIn = await isAuthenticated();
+    if (!isLoggedIn) {
+      window.manualRoute('/login');
+      return;
+    }
+  }
+
   const view = new match.route.view();
 
   document.getElementById('app').style.visibility = 'hidden';
@@ -71,7 +84,7 @@ const handleLocation = async () => {
   setTimeout(() => {
     document.getElementById('app').style.visibility = 'visible';
     document.querySelector('.loader').classList.remove('loading');
-  }, 250);
+  }, 500);
 
   setCorrectLinkActive();
 };
@@ -79,6 +92,7 @@ const handleLocation = async () => {
 // routing when the user navigates through history
 window.onpopstate = handleLocation;
 window.route = route;
+window.manualRoute = manualRoute;
 
 document.addEventListener('DOMContentLoaded', () => {
   // changing the default behaviour of links on the pages
@@ -94,3 +108,27 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 handleLocation();
+
+// Authentication
+async function isAuthenticated() {
+  const token = localStorage.getItem('token');
+
+  if (!token) return false;
+
+  try {
+    const response = await $.ajax({
+      url: 'http://localhost:5000/profile',
+      type: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      contentType: 'application/json',
+      dataType: 'json',
+    });
+
+    window.user = response;
+    return true;
+  } catch (err) {
+    return false;
+  }
+}

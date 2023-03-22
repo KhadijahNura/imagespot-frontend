@@ -47,6 +47,7 @@
   </head>
 
   <body>
+    <script src="../js/scripts/script.js"></script>
     <!-- 
     - #PRELOADER
   -->
@@ -114,11 +115,9 @@
       <article id="app">
         <section class="section not-found" aria-labelledby="not found">
           <div class="not-found-container">
-            <img src="../images/hero-img.svg" alt="" />
-            <p>The page you're looking for does not exist</p>
-            <a href="/" class="btn btn-primary" data-link
-              >Go back to home page</a
-            >
+            <form onsubmit="login()">
+              <button type="submit">SUBMIT</button>
+            </form>
           </div>
         </section>
       </article>
@@ -138,57 +137,27 @@
     - custom js link
   -->
     <script>
-      /**
-       * Add eventListener on multiple elements
-       */
+      function login(e) {
+        e.preventDefault();
 
-      const addEventOnElements = function (elements, eventType, callback) {
-        for (let i = 0, len = elements.length; i < len; i++) {
-          elements[i].addEventListener(eventType, callback);
-        }
-      };
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
 
-      /**
-       * PRELOADER
-       */
-
-      const preloader = document.querySelector('[data-preloader]');
-
-      window.addEventListener('load', function () {
-        preloader.classList.add('loaded');
-        document.body.classList.add('loaded');
-      });
-
-      /**
-       * MOBILE NAV TOGGLE
-       */
-
-      const navbar = document.querySelector('[data-navbar]');
-      const navToggler = document.querySelector('[data-nav-toggler]');
-
-      const toggleNavbar = function () {
-        navbar.classList.toggle('active');
-      };
-
-      navToggler.addEventListener('click', toggleNavbar);
-
-      /**
-       * HEADER
-       *
-       * active header when window scrolled to 50px
-       */
-
-      const header = document.querySelector('[data-header]');
-
-      const activeHeader = function () {
-        window.scrollY > 50
-          ? header.classList.add('active')
-          : header.classList.remove('active');
-      };
-
-      window.addEventListener('scroll', activeHeader);
+        $.ajax({
+          url: 'http://localhost:5000/login',
+          type: 'POST',
+          data: { username, password },
+          contentType: 'application/json',
+          dataType: 'application/json',
+          success: function (result, status, xhr) {
+            console.log('RESULT', result);
+          },
+          error: function (xhr, status, error) {
+            console.log('ERROR', err);
+          },
+        });
+      }
     </script>
-
     <!-- 
     - ionicon
   -->
