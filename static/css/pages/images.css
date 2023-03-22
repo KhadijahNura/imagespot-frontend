@@ -144,25 +144,30 @@
 
 .search-form {
   display: flex;
-  gap: 2rem;
+  /* gap: 2rem; */
   z-index: 5;
 }
 
 .search-input {
   outline: transparent;
-  box-shadow: 0.1rem 0.1rem 0 0.1rem #121212;
   padding: 1rem 1.5rem;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
   background-color: #ffffff;
+  margin: 0;
 }
 
 .search-input:is(:focus) {
-  outline: transparent;
+  outline-offset: 0;
+  outline: 0.1px solid var(--orange-red);
+}
+
+.search-input:is(:focus) + .search-btn {
+  outline: 0.1px solid var(--orange-red);
 }
 
 .search-btn {
   background-color: var(--orange-red);
   padding: 1rem 1.5rem;
   color: #ffffff;
-  border-radius: 5px;
+  border-radius: 0 5px 5px 0;
 }

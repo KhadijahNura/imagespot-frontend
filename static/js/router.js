@@ -8,6 +8,8 @@ import NotFound from './views/NotFound.js';
 import Signup from './views/Signup.js';
 import Upload from './views/Upload.js';
 
+const BACKEND_URL = 'https://imagespot-backend.onrender.com';
+
 const routes = [
   { path: '/', view: Dashboard },
   { path: '/images', view: Images },
@@ -116,7 +118,7 @@ async function isAuthenticated() {
 
   try {
     const response = await $.ajax({
-      url: 'http://localhost:5000/profile',
+      url: `${BACKEND_URL}/profile`,
       type: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -138,7 +140,7 @@ async function fetchImages() {
     document.querySelector('.loader').classList.add('loading');
 
     const images = await $.ajax({
-      url: 'http://localhost:5000/images',
+      url: `${BACKEND_URL}/images`,
       type: 'GET',
       contentType: 'application/json',
       dataType: 'json',
@@ -190,15 +192,14 @@ async function setupImagesPage(images) {
 
     const cardImage = document.createElement('img');
     cardImage.classList.add('card__image');
-    cardImage.src = `http://localhost:5000/${image.image_url}`;
+    cardImage.src = `${BACKEND_URL}/${image.image_url}`;
     cardImage.alt = image.description;
 
     const cardImageOverlay = document.createElement('div');
     cardImageOverlay.classList.add('card__image-overlay');
 
     const cardBtn = document.createElement('btn');
-    cardBtn.onclick = () =>
-      downloadURI('http://localhost:5000/' + image.image_url);
+    cardBtn.onclick = () => downloadURI(`${BACKEND_URL}/${image.image_url}`);
     cardBtn.innerText = 'Download';
     cardBtn.classList.add('card-btn');
 
@@ -229,7 +230,7 @@ async function setupImagesPage(images) {
     const cardInfoLink = document.createElement('a');
     cardInfoLink.classList.add('card__link');
     cardInfoLink.target = '_blank';
-    cardInfoLink.href = `http://localhost:5000/${image.image_url}`;
+    cardInfoLink.href = `${BACKEND_URL}/${image.image_url}`;
     cardInfoLink.innerText = 'View';
 
     cardInfo.appendChild(cardInfoLink);

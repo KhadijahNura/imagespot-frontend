@@ -1,11 +1,13 @@
 'use strict';
 
+const BACKEND_URL = 'https://imagespot-backend.onrender.com';
+
 function login() {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
   $.ajax({
-    url: 'http://localhost:5000/login',
+    url: `${BACKEND_URL}/login`,
     type: 'POST',
     data: JSON.stringify({ username: username, password: password }),
     contentType: 'application/json',
@@ -39,7 +41,7 @@ function signup() {
   }
 
   $.ajax({
-    url: 'http://localhost:5000/signup',
+    url: `${BACKEND_URL}/signup`,
     type: 'POST',
     data: JSON.stringify({ username: username, password: password }),
     contentType: 'application/json',
@@ -85,7 +87,7 @@ async function uploadImage() {
     document.querySelector('.loader').classList.add('loading');
 
     const imageResponse = await $.ajax({
-      url: 'http://localhost:5000/images',
+      url: `${BACKEND_URL}/images`,
       type: 'POST',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
@@ -96,7 +98,7 @@ async function uploadImage() {
     });
 
     await $.ajax({
-      url: `http://localhost:5000/images/${imageResponse.id}`,
+      url: `${BACKEND_URL}/images/${imageResponse.id}`,
       type: 'PATCH',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
