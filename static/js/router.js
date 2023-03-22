@@ -166,6 +166,8 @@ async function isAuthenticated() {
 // populating image section
 async function fetchImages() {
   try {
+    document.querySelector('.loader').classList.add(loading);
+
     const images = await $.ajax({
       url: 'http://localhost:5000/images',
       type: 'GET',
@@ -217,7 +219,10 @@ async function fetchImages() {
 
       document.querySelector('.image-cards-container').appendChild(card);
     }
+
+    document.querySelector('.loader').classList.remove(loading);
   } catch (err) {
+    document.querySelector('.loader').classList.remove(loading);
     showToast('An error occured', false);
     console.log(err);
   }
