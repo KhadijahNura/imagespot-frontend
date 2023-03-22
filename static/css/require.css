@@ -348,6 +348,63 @@ body.loaded {
 }
 
 /*-----------------------------------*\
+  #LOADER
+\*-----------------------------------*/
+
+body:has(.loader.loading) {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.loader.loading {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: grid;
+  place-items: center;
+  z-index: 6;
+}
+
+.loader {
+  display: none;
+}
+
+.circles {
+  display: flex;
+}
+
+.circle {
+  background: #121212;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  margin-right: 5px;
+  animation: bounce 1s infinite forwards;
+}
+
+.circle:nth-of-type(1) {
+  animation-delay: 0ms;
+}
+
+.circle:nth-of-type(2) {
+  animation-delay: 70ms;
+}
+
+.circle:nth-of-type(3) {
+  animation-delay: 140ms;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/*-----------------------------------*\
   #HEADER
 \*-----------------------------------*/
 

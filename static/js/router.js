@@ -64,13 +64,14 @@ const handleLocation = async () => {
   const view = new match.route.view();
 
   document.getElementById('app').style.visibility = 'hidden';
+  document.querySelector('.loader').classList.add('loading');
 
   document.getElementById('app').innerHTML = await view.getHTML();
 
-  setTimeout(
-    () => (document.getElementById('app').style.visibility = 'visible'),
-    250
-  );
+  setTimeout(() => {
+    document.getElementById('app').style.visibility = 'visible';
+    document.querySelector('.loader').classList.remove('loading');
+  }, 250);
 
   setCorrectLinkActive();
 };
