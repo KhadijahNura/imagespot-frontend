@@ -15,7 +15,8 @@ function login() {
     dataType: 'json',
     success: function (result, _, __) {
       localStorage.setItem('token', result.token);
-      window.manualRoute('/images');
+      window.manualRoute(localStorage.getItem('redirect') || '/images');
+      localStorage.setItem('redirect', '');
       showToast('Login Successful', true);
     },
     error: function (xhr, _, __) {

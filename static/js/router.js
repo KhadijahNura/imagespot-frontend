@@ -78,6 +78,7 @@ const handleLocation = async () => {
   if (path === '/upload') {
     const isLoggedIn = await isAuthenticated();
     if (!isLoggedIn) {
+      localStorage.setItem('redirect', '/upload');
       window.manualRoute('/login');
       return;
     }
@@ -86,6 +87,7 @@ const handleLocation = async () => {
   if (path === '/profile') {
     const isLoggedIn = await isAuthenticated();
     if (!isLoggedIn) {
+      localStorage.setItem('redirect', '/profile');
       window.manualRoute('/login');
       return;
     }
