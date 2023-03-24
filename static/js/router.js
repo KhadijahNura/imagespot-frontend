@@ -5,17 +5,21 @@ import Dashboard from './views/Dashboard.js';
 import Images from './views/Images.js';
 import Login from './views/Login.js';
 import NotFound from './views/NotFound.js';
+import Profile from './views/Profile.js';
 import Signup from './views/Signup.js';
 import Upload from './views/Upload.js';
 
-const BACKEND_URL = 'https://imagespot-backend.onrender.com';
+// const BACKEND_URL = 'https://imagespot-backend.onrender.com';
+const BACKEND_URL = 'http://localhost:5000';
 
 const routes = [
   { path: '/', view: Dashboard },
+  { path: '/index.html', view: Dashboard },
   { path: '/images', view: Images },
   { path: '/upload', view: Upload },
   { path: '/login', view: Login },
   { path: '/signup', view: Signup },
+  { path: '/profile', view: Profile },
   { path: '/404', view: NotFound },
 ];
 
@@ -43,6 +47,11 @@ const setCorrectLinkActive = () => {
     else if (location.pathname === '/login' && navbarLink.id === 'login-link')
       navbarLink.classList.add('active');
     else if (location.pathname === '/signup' && navbarLink.id === 'signup-link')
+      navbarLink.classList.add('active');
+    else if (
+      location.pathname === '/profile' &&
+      navbarLink.id === 'profile-link'
+    )
       navbarLink.classList.add('active');
   });
 };
@@ -74,6 +83,14 @@ const handleLocation = async () => {
     }
   }
 
+  if (path === '/profile') {
+    const isLoggedIn = await isAuthenticated();
+    if (!isLoggedIn) {
+      window.manualRoute('/login');
+      return;
+    }
+  }
+
   const view = new match.route.view();
 
   document.getElementById('app').style.visibility = 'hidden';
@@ -83,6 +100,10 @@ const handleLocation = async () => {
 
   if (path === '/images') {
     await fetchImages();
+  }
+
+  if (path === '/profile') {
+    await fetchUploads();
   }
 
   setTimeout(() => {
@@ -105,8 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
-handleLocation();
 
 // Authentication
 async function isAuthenticated() {
@@ -147,6 +166,30 @@ async function fetchImages() {
     window.images = images;
 
     await setupImagesPage(images);
+  } catch (err) {
+    document.querySelector('.loader').classList.remove('loading');
+    showToast('An error occured', false);
+  }
+}
+
+// populate uploads page
+async function fetchUploads() {
+  try {
+    document.querySelector('.loader').classList.add('loading');
+
+    const uploads = await $.ajax({
+      url: `${BACKEND_URL}/uploads`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
+      },
+      type: 'GET',
+      contentType: 'application/json',
+      dataType: 'json',
+    });
+
+    window.uploads = uploads;
+
+    await setupUploadsPage(uploads);
   } catch (err) {
     document.querySelector('.loader').classList.remove('loading');
     showToast('An error occured', false);
@@ -238,8 +281,77 @@ async function setupImagesPage(images) {
   }
 }
 
+async function setupUploadsPage(images) {
+  document.getElementById('username').innerText = window.user.username;
+
+  const imagesCardContainer = document.querySelector('.image-cards-container');
+  imagesCardContainer.innerHTML = '';
+  document.querySelector('.search-form-container').style.display = 'flex';
+
+  if (images.length === 0) {
+    document.querySelector('.search-form-container').style.display = 'none';
+
+    imagesCardContainer.outerHTML = `
+      <div style="display: grid; place-items: center;">
+        <p style="margin-block: 1rem">You haven't uploaded any images yet</p>
+        <a href="/upload" class="btn btn-primary" data-link>Upload an image</a>
+      </div>
+    `;
+    return;
+  }
+
+  for (let i = 0; i < images.length; i++) {
+    const image = images[i];
+    const card = prepareCard(image);
+
+    imagesCardContainer.appendChild(card);
+  }
+
+  function prepareCard(image) {
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    const cardImageContainer = document.createElement('div');
+    cardImageContainer.classList.add('card-image-container');
+
+    const cardImage = document.createElement('img');
+    cardImage.classList.add('card__image');
+    cardImage.src = `${BACKEND_URL}/${image.image_url}`;
+    cardImage.alt = image.description;
+
+    const cardImageOverlay = document.createElement('div');
+    cardImageOverlay.classList.add('card__image-overlay');
+
+    const cardBtn = document.createElement('btn');
+    cardBtn.onclick = () => deleteImage(`${image.id}`);
+    cardBtn.innerText = 'Delete';
+    cardBtn.classList.add('card-btn');
+
+    cardImageContainer.append(cardImage, cardImageOverlay, cardBtn);
+
+    const cardContent = document.createElement('div');
+    cardContent.classList.add('card__content');
+
+    const cardContentFirstDesc = document.createElement('p');
+    const cardContentFirstSubtitle = document.createElement('span');
+
+    cardContentFirstSubtitle.classList.add('card__content-title');
+    cardContentFirstSubtitle.innerText = 'Description: ';
+    cardContentFirstDesc.innerHTML = `${cardContentFirstSubtitle.outerHTML} ${image.description}`;
+
+    cardContent.append(cardContentFirstDesc);
+
+    card.append(cardImageContainer, cardContent);
+    return card;
+  }
+}
+
+// handle location on page load
+handleLocation();
+
 // routing when the user navigates through history
 window.onpopstate = handleLocation;
 window.route = route;
 window.manualRoute = manualRoute;
 window.setupImagesPage = setupImagesPage;
+window.setupUploadsPage = setupUploadsPage;

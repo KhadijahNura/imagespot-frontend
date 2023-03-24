@@ -1,8 +1,44 @@
 @import url('../components/btn.css');
 
-.images-section {
+.profile-section {
   min-height: 100dvh;
   padding-block-start: calc(var(--section-padding) + 60px);
+}
+
+.profile-text {
+  margin: 10px;
+}
+
+.profile-text > h2 {
+  font-weight: 900;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.details-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 3rem;
+  text-align: left;
+  font-size: 2rem;
+}
+
+.details-container > * {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.detail {
+  display: inline;
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+.user-uploads > h3 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-top: 3rem;
+  text-align: center;
 }
 
 .cards {
@@ -21,7 +57,6 @@
 }
 
 .card {
-  /* max-width: 40rem; */
   border-radius: 0.5rem;
   box-shadow: 0.3rem 0.1rem 0.3rem 0.1rem #868686;
   transition: scale 0.2s ease-out;
@@ -30,7 +65,7 @@
 .card-btn {
   border-radius: 0.5rem;
   color: antiquewhite;
-  background-color: var(--orange-red);
+  background-color: hsl(0, 100%, 33%);
   padding: 1rem 1.5rem;
   display: none;
   cursor: pointer;
@@ -38,7 +73,7 @@
   /* Centering the button */
   position: absolute;
   left: 50%;
-  margin-left: -50px;
+  margin-left: -40px;
   top: 50%;
   margin-top: -20px;
 }
@@ -88,32 +123,8 @@
   background: #fafafa;
 }
 
-.card__content > p:first-of-type {
+.card__content > p {
   margin-top: 0;
-}
-
-.card__content > p:last-of-type {
-  margin-bottom: 0;
-}
-
-.card__info {
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #555555;
-  background: #eeeeee;
-  font-size: 0.8em;
-}
-
-.card__link {
-  color: #64968c;
-  text-decoration: none;
-  margin-left: auto;
-}
-
-.card__link:is(:hover, :focus) {
-  text-decoration: underline;
 }
 
 .search-form-container {
@@ -124,7 +135,6 @@
 
 .search-form {
   display: flex;
-  /* gap: 2rem; */
   z-index: 5;
 }
 

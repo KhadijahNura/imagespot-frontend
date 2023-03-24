@@ -1,6 +1,7 @@
 'use strict';
 
-const BACKEND_URL = 'https://imagespot-backend.onrender.com';
+// const BACKEND_URL = 'https://imagespot-backend.onrender.com';
+const BACKEND_URL = 'http://localhost:5000';
 
 function login() {
   const username = document.getElementById('username').value;
@@ -108,12 +109,62 @@ async function uploadImage() {
       dataType: 'json',
     });
 
-    document.querySelector('.loader').classList.add('loading');
+    document.querySelector('.loader').classList.remove('loading');
 
     showToast('Upload Successful', true);
     window.manualRoute('/images');
   } catch (err) {
+    document.querySelector('.loader').classList.remove('loading');
+    showToast(
+      err.responseJSON.message
+        ? err.responseJSON.message
+        : err.responseJSON.error
+        ? err.responseJSON.error
+        : 'An error occurred',
+      false
+    );
     console.log(err);
+  }
+}
+
+async function deleteImage(id) {
+  const response = prompt(
+    "Are you sure you want to delete this item? Type 'yes' to proceed"
+  );
+
+  if (response && response.toLowerCase() === 'yes') {
+    try {
+      document.querySelector('.loader').classList.add('loading');
+
+      await $.ajax({
+        url: `${BACKEND_URL}/images/${id}`,
+        type: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
+        },
+        processData: false,
+        contentType: false,
+      });
+
+      document.querySelector('.loader').classList.remove('loading');
+
+      showToast('Delete Successful', true);
+      window.uploads = window.uploads.filter(
+        (upload) => upload.id !== parseInt(id)
+      );
+      await window.setupUploadsPage(window.uploads);
+    } catch (err) {
+      document.querySelector('.loader').classList.remove('loading');
+      showToast(
+        err.responseJSON.message
+          ? err.responseJSON.message
+          : err.responseJSON.error
+          ? err.responseJSON.error
+          : 'An error occurred',
+        false
+      );
+      console.log(err);
+    }
   }
 }
 
@@ -131,6 +182,23 @@ async function searchImages() {
     await window.setupImagesPage(result);
   } else {
     await window.setupImagesPage(images);
+  }
+}
+
+async function searchUploads() {
+  const searchQuery = document.getElementById('search').value;
+  const images = window.uploads;
+  let result = [];
+
+  if (searchQuery !== '') {
+    images.forEach((image) => {
+      if (image.description.toLowerCase().includes(searchQuery)) {
+        result.push(image);
+      }
+    });
+    await window.setupUploadsPage(result);
+  } else {
+    await window.setupUploadsPage(images);
   }
 }
 

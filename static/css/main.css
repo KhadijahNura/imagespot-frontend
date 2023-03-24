@@ -172,6 +172,23 @@
   font-weight: var(--fw-500);
 }
 
+/* For forms */
+.form-text {
+  display: flex;
+  margin-block: 10px;
+  gap: 3px;
+}
+
+.form-text > a {
+  color: hsl(240, 91%, 63%);
+  transform: text-decoration 1s ease-out;
+  cursor: pointer;
+}
+
+.form-text:hover > a {
+  text-decoration: underline;
+}
+
 /*-----------------------------------*\
   #MEDIA QUERIES
 \*-----------------------------------*/
