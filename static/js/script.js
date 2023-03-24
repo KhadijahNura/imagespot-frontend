@@ -179,6 +179,7 @@ async function searchImages() {
         result.push(image);
       }
     });
+
     await window.setupImagesPage(result);
   } else {
     await window.setupImagesPage(images);
@@ -196,6 +197,12 @@ async function searchUploads() {
         result.push(image);
       }
     });
+
+    if (result.length === 0) {
+      document.querySelector('.cards').innerText = 'No images found';
+      return;
+    }
+
     await window.setupUploadsPage(result);
   } else {
     await window.setupUploadsPage(images);
