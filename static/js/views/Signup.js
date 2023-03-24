@@ -41,7 +41,7 @@ export default class extends AbstractView {
                 required
               />
 
-              <button type="submit" class="btn btn-tertiary">Signup</button>
+              <button type="submit" class="btn btn-tertiary" id="signup-btn">Signup</button>
 
               <p class="form-text">Already have an account? <a href="/login" data-link>Login</a></p>
             </form>

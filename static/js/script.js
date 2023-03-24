@@ -7,6 +7,20 @@ function login() {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
+  const loginBtn = document.getElementById('login-btn');
+
+  if (!username) return showToast('Please enter username', false);
+  if (!password) return showToast('Please enter username', false);
+
+  if (username.length < 3)
+    return showToast('Username must be at least 3 characters long', false);
+  if (password.length < 8) {
+    return showToast('Password must be at least 8 characters long', false);
+  }
+
+  loginBtn.disabled = true;
+  loginBtn.innerText = 'Loading...';
+
   $.ajax({
     url: `${BACKEND_URL}/login`,
     type: 'POST',
@@ -14,12 +28,18 @@ function login() {
     contentType: 'application/json',
     dataType: 'json',
     success: function (result, _, __) {
+      loginBtn.disabled = false;
+      loginBtn.innerText = 'Login';
+
       localStorage.setItem('token', result.token);
       window.manualRoute(localStorage.getItem('redirect') || '/images');
       localStorage.setItem('redirect', '');
       showToast('Login Successful', true);
     },
     error: function (xhr, _, __) {
+      loginBtn.disabled = false;
+      loginBtn.innerText = 'Login';
+
       xhr.responseJSON.error
         ? showToast(xhr.responseJSON.error, false)
         : xhr.responseJSON.message
@@ -33,6 +53,8 @@ function signup() {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
+  const signupBtn = document.getElementById('signup-btn');
+
   if (!username) return showToast('Please enter username', false);
   if (!password) return showToast('Please enter username', false);
 
@@ -42,6 +64,9 @@ function signup() {
     return showToast('Password must be at least 8 characters long', false);
   }
 
+  signupBtn.disabled = true;
+  signupBtn.innerText = 'Loading...';
+
   $.ajax({
     url: `${BACKEND_URL}/signup`,
     type: 'POST',
@@ -49,11 +74,17 @@ function signup() {
     contentType: 'application/json',
     dataType: 'json',
     success: function (result, _, __) {
+      signupBtn.disabled = false;
+      signupBtn.innerText = 'Sign Up';
+
       localStorage.setItem('token', result.token);
       window.manualRoute('/images');
       showToast('Signup Successful', true);
     },
     error: function (xhr, _, __) {
+      signupBtn.disabled = false;
+      signupBtn.innerText = 'Sign Up';
+
       xhr.responseJSON.error
         ? showToast(xhr.responseJSON.error, false)
         : xhr.responseJSON.message
@@ -176,7 +207,7 @@ async function searchImages() {
 
   if (searchQuery !== '') {
     images.forEach((image) => {
-      if (image.description.toLowerCase().includes(searchQuery)) {
+      if (image.description.toLowerCase().includes(searchQuery.toLowerCase())) {
         result.push(image);
       }
     });
@@ -194,7 +225,7 @@ async function searchUploads() {
 
   if (searchQuery !== '') {
     images.forEach((image) => {
-      if (image.description.toLowerCase().includes(searchQuery)) {
+      if (image.description.toLowerCase().includes(searchQuery.toLowerCase())) {
         result.push(image);
       }
     });
