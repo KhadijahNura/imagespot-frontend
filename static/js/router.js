@@ -80,6 +80,7 @@ const handleLocation = async () => {
     if (!isLoggedIn) {
       localStorage.setItem('redirect', '/upload');
       window.manualRoute('/login');
+      window.showToast('Log in to access uploads', false);
       return;
     }
   }
@@ -89,6 +90,7 @@ const handleLocation = async () => {
     if (!isLoggedIn) {
       localStorage.setItem('redirect', '/profile');
       window.manualRoute('/login');
+      window.showToast('Log in to access profile', false);
       return;
     }
   }
