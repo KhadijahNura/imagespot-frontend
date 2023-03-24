@@ -10,7 +10,7 @@ function login() {
   $.ajax({
     url: `${BACKEND_URL}/login`,
     type: 'POST',
-    data: JSON.stringify({ username: username, password: password }),
+    data: JSON.stringify({ username, password }),
     contentType: 'application/json',
     dataType: 'json',
     success: function (result, _, __) {
@@ -44,7 +44,7 @@ function signup() {
   $.ajax({
     url: `${BACKEND_URL}/signup`,
     type: 'POST',
-    data: JSON.stringify({ username: username, password: password }),
+    data: JSON.stringify({ username, password }),
     contentType: 'application/json',
     dataType: 'json',
     success: function (result, _, __) {
@@ -104,7 +104,7 @@ async function uploadImage() {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
       },
-      data: JSON.stringify({ description: description }),
+      data: JSON.stringify({ description }),
       contentType: 'application/json',
       dataType: 'json',
     });
