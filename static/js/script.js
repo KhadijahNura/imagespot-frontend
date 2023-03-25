@@ -292,6 +292,12 @@ window.onload = function () {
       : header.classList.remove('active');
   };
 
+  document.body.addEventListener('mousedown', (e) => {
+    if (navbar.classList.contains('active')) {
+      if (!navToggler.contains(e.target)) navbar.classList.remove('active');
+    }
+  });
+
   window.addEventListener('scroll', activeHeader);
   window.showToast = showToast;
 };
