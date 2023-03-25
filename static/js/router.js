@@ -264,7 +264,7 @@ async function setupImagesPage(images) {
     const cardContentSecondSubtitle = document.createElement('span');
 
     cardContentSecondSubtitle.classList.add('card__content-title');
-    cardContentSecondSubtitle.innerText = 'Author: ';
+    cardContentSecondSubtitle.innerText = 'Uploaded by: ';
     cardContentSecondDesc.innerHTML = `${cardContentSecondSubtitle.outerHTML} ${image.author_data.username}`;
 
     cardContent.append(cardContentFirstDesc, cardContentSecondDesc);

@@ -151,6 +151,10 @@ body.loaded {
   overflow: visible;
 }
 
+.hidden {
+  display: none;
+}
+
 :focus-visible {
   outline-offset: 4px;
 }
@@ -396,10 +400,6 @@ body:has(.loader.loading) {
   background: rgb(253, 60, 60);
 }
 
-.hidden {
-  display: none;
-}
-
 .toast ion-icon {
   color: white;
   font-weight: 900;
@@ -456,7 +456,6 @@ body:has(.loader.loading) {
   left: 0;
   width: 100%;
   background-color: var(--white);
-  padding-block: 16px;
   z-index: 4;
   transition: var(--transition-1);
 }
