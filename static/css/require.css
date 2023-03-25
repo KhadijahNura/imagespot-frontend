@@ -333,6 +333,8 @@ body:has(.loader.loading) {
 
 .loader {
   display: none;
+  position: relative;
+  z-index: 999;
 }
 
 .circles {
@@ -456,7 +458,7 @@ body:has(.loader.loading) {
   left: 0;
   width: 100%;
   background-color: var(--white);
-  z-index: 4;
+  z-index: 6;
   transition: var(--transition-1);
 }
 
@@ -651,6 +653,10 @@ footer {
   .navbar > * {
     all: unset;
     display: block;
+  }
+
+  .navbar .mobile-only {
+    display: none;
   }
 
   .navbar-list {
