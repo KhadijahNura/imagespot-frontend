@@ -8,8 +8,6 @@ export default class extends AbstractView {
 
   async getHTML() {
     return `
-      <link rel="stylesheet" href="./static/css/pages/login.css" />
-
        <section
           class="section login has-bg-image"
           aria-labelledby="uploaded images"

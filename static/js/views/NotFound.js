@@ -8,8 +8,6 @@ export default class extends AbstractView {
 
   async getHTML() {
     return `
-      <link rel="stylesheet" href="./static/css/pages/notfound.css" />
-
         <section class="section not-found" aria-labelledby="not found">
           <div class="not-found-container">
             <img src="./static/images/404.png" alt="" />

@@ -269,6 +269,119 @@ body.loaded {
   text-align: center;
 }
 
+.cards {
+  margin: 0 auto;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  grid-auto-rows: auto;
+  gap: 20px;
+  font-family: sans-serif;
+  padding-top: 30px;
+}
+
+.cards * {
+  box-sizing: border-box;
+}
+
+.card {
+  border-radius: 0.5rem;
+  box-shadow: 0.3rem 0.1rem 0.3rem 0.1rem #868686;
+  transition: scale 0.2s ease-out;
+}
+
+.card-btn {
+  border-radius: 0.5rem;
+  color: antiquewhite;
+  padding: 1rem 1.5rem;
+  display: none;
+  cursor: pointer;
+}
+
+.card:is(:hover, :focus, :focus-within) {
+  scale: 1.05;
+}
+
+.card:is(:hover, :focus, :focus-within) .card__image-overlay {
+  opacity: 0.5;
+}
+
+.card:is(:hover, :focus, :focus-within) .card-btn {
+  display: block;
+}
+
+.card__content-title {
+  display: block;
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin-top: 10px;
+}
+
+.card-image-container {
+  position: relative;
+}
+
+.card__image-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: black;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.card__image {
+  width: 100%;
+  height: 20rem;
+  object-fit: cover;
+  display: block;
+}
+
+.card__content {
+  line-height: 1.5;
+  font-size: 0.9em;
+  padding: 15px;
+  background: #fafafa;
+}
+
+.card__content > p {
+  margin-top: 0;
+}
+
+.search-form-container {
+  display: flex;
+  margin: 10px;
+  justify-content: end;
+}
+
+.search-form {
+  display: flex;
+  z-index: 5;
+}
+
+.search-input {
+  outline: transparent;
+  padding: 1rem 1.5rem;
+  border-radius: 5px 0 0 5px;
+  background-color: #ffffff;
+  margin: 0;
+}
+
+.search-input:is(:focus) {
+  outline-offset: 0;
+  outline: 0.1px solid var(--orange-red);
+}
+
+.search-input:is(:focus) + .search-btn {
+  outline: 0.1px solid var(--orange-red);
+}
+
+.search-btn {
+  background-color: var(--orange-red);
+  padding: 1rem 1.5rem;
+  color: #ffffff;
+  border-radius: 0 5px 5px 0;
+}
+
 .img-cover {
   width: 100%;
   height: 100%;
