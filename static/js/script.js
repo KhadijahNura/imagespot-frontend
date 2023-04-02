@@ -32,9 +32,10 @@ function login() {
       loginBtn.innerText = 'Login';
 
       localStorage.setItem('token', result.token);
+      await getUserDetails();
+
       window.manualRoute(localStorage.getItem('redirect') || '/images');
       localStorage.setItem('redirect', '');
-      await getUserDetails();
       showToast('Login Successful', true);
     },
     error: function (xhr, _, __) {
@@ -91,8 +92,9 @@ function signup() {
       signupBtn.innerText = 'Sign Up';
 
       localStorage.setItem('token', result.token);
-      window.manualRoute('/images');
       await getUserDetails();
+
+      window.manualRoute('/images');
       showToast('Signup Successful', true);
     },
     error: function (xhr, _, __) {
