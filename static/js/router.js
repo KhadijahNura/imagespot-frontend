@@ -53,6 +53,8 @@ const setCorrectLinkActive = () => {
       navbarLink.id === 'profile-link'
     )
       navbarLink.classList.add('active');
+    else if (location.pathname === '/upload' && navbarLink.id === 'upload-link')
+      navbarLink.classList.add('active');
   });
 };
 
@@ -133,13 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Authentication
 async function isAuthenticated() {
-  if (window.user) {
-    console.log(window.user);
-    return true;
-  } else {
-    console.log('TOH');
-    return false;
-  }
+  if (window.user) return true;
+  else return false;
 }
 
 // populating image section

@@ -314,12 +314,11 @@ window.onload = function () {
 
   window.addEventListener('scroll', activeHeader);
   window.showToast = showToast;
-
-  getUserDetails();
 };
 
+getUserDetails();
+
 async function getUserDetails() {
-  console.log('AUTH');
   const token = localStorage.getItem('token');
 
   try {
