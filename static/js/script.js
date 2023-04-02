@@ -289,7 +289,9 @@ function showToast(text, isSuccess) {
 }
 
 window.onload = async function () {
-  await getUserDetails();
+  document.querySelector('li:has(#login-link)').classList.remove('hidden');
+  document.querySelector('li:has(#signup-link)').classList.remove('hidden');
+  document.querySelector('li:has(#profile-link)').classList.add('hidden');
 
   // mobile nav toggle
   const navbar = document.querySelector('[data-navbar]');
@@ -315,6 +317,8 @@ window.onload = async function () {
       if (!navToggler.contains(e.target)) navbar.classList.remove('active');
     }
   });
+
+  await getUserDetails();
 
   window.addEventListener('scroll', activeHeader);
   window.showToast = showToast;
