@@ -262,7 +262,17 @@ async function setupImagesPage(images) {
     cardInfoLink.href = `${BACKEND_URL}/${image.image_url}`;
     cardInfoLink.innerText = 'View';
 
-    cardInfo.appendChild(cardInfoLink);
+    const copyImageLink = document.createElement('p');
+    copyImageLink.title = 'Copy image link to clipboard';
+    copyImageLink.innerHTML =
+      '<ion-icon name="copy-outline" class="copy-icon"></ion-icon>';
+
+    copyImageLink.onclick = function () {
+      navigator.clipboard.writeText(`${BACKEND_URL}/${image.image_url}`);
+      window.showToast('Link copied to clipboard', true);
+    };
+
+    cardInfo.append(copyImageLink, cardInfoLink);
     card.append(cardImageContainer, cardContent, cardInfo);
 
     imagesCardContainer.appendChild(card);

@@ -43,3 +43,11 @@
 .images-section .card__link:is(:hover, :focus) {
   text-decoration: underline;
 }
+
+p:has(.copy-icon) {
+  cursor: pointer;
+}
+
+.copy-icon {
+  font-size: large;
+}

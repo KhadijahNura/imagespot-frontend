@@ -286,7 +286,9 @@ function showToast(text, isSuccess) {
   }, 3000);
 }
 
-window.onload = function () {
+window.onload = async function () {
+  await getUserDetails();
+
   // mobile nav toggle
   const navbar = document.querySelector('[data-navbar]');
   const navToggler = document.querySelector('[data-nav-toggler]');
@@ -315,8 +317,6 @@ window.onload = function () {
   window.addEventListener('scroll', activeHeader);
   window.showToast = showToast;
 };
-
-getUserDetails();
 
 async function getUserDetails() {
   const token = localStorage.getItem('token');
