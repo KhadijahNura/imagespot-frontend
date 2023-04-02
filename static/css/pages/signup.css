@@ -1,0 +1,64 @@
+@import url('../components/btn.css');
+
+.signup {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding-block-start: calc(var(--section-padding) + 60px);
+}
+
+.signup .container {
+  display: grid;
+  gap: 48px;
+}
+
+.signup-form {
+  background-color: #fff;
+  box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem;
+  padding: 25px;
+  width: min(80vw, 60rem);
+}
+
+.input-container {
+  gap: 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.signup .input-field {
+  margin: 0 !important;
+}
+
+.signup .label {
+  margin-block-end: 8px;
+}
+
+#signup-btn {
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .signup-form {
+    padding: 35px;
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .signup .container {
+    grid-template-columns: 1fr 0.9fr;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .signup-content {
+    width: 70%;
+    margin-inline: auto;
+  }
+}

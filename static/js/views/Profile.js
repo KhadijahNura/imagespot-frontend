@@ -17,7 +17,10 @@ export default class extends AbstractView {
             <div class="profile-text">
               <h2>Personal Details</h2>
               <div class="details-container">
-                <p>Username: <span class="detail" id="username">Leeyah</span></p>
+                <p>First Name: <span class="detail" id="first_name"></span></p>
+                <p>Last Name: <span class="detail" id="last_name"></span></p>
+                <p>Username: <span class="detail" id="username"></span></p>
+                <p>Email: <span class="detail" id="email"></span></p>
               </div>
             </div>
 

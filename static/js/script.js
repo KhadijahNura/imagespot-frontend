@@ -27,13 +27,14 @@ function login() {
     data: JSON.stringify({ username, password }),
     contentType: 'application/json',
     dataType: 'json',
-    success: function (result, _, __) {
+    success: async function (result, _, __) {
       loginBtn.disabled = false;
       loginBtn.innerText = 'Login';
 
       localStorage.setItem('token', result.token);
       window.manualRoute(localStorage.getItem('redirect') || '/images');
       localStorage.setItem('redirect', '');
+      await getUserDetails();
       showToast('Login Successful', true);
     },
     error: function (xhr, _, __) {
@@ -52,14 +53,26 @@ function login() {
 function signup() {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
+  const email = document.getElementById('email').value;
+  const first_name = document.getElementById('first_name').value;
+  const last_name = document.getElementById('last_name').value;
 
   const signupBtn = document.getElementById('signup-btn');
 
   if (!username) return showToast('Please enter username', false);
   if (!password) return showToast('Please enter username', false);
+  if (!email) return showToast('Please enter email', false);
+  if (!first_name) return showToast('Please enter first name', false);
+  if (!last_name) return showToast('Please enter last name', false);
 
   if (username.length < 3)
     return showToast('Username must be at least 3 characters long', false);
+  if (first_name.length < 3)
+    return showToast('First name must be at least 3 characters long', false);
+  if (last_name.length < 3)
+    return showToast('Last name must be at least 3 characters long', false);
+  if (email.length < 3)
+    return showToast('Email must be at least 3 characters long', false);
   if (password.length < 8) {
     return showToast('Password must be at least 8 characters long', false);
   }
@@ -70,15 +83,16 @@ function signup() {
   $.ajax({
     url: `${BACKEND_URL}/signup`,
     type: 'POST',
-    data: JSON.stringify({ username, password }),
+    data: JSON.stringify({ username, email, first_name, last_name, password }),
     contentType: 'application/json',
     dataType: 'json',
-    success: function (result, _, __) {
+    success: async function (result, _, __) {
       signupBtn.disabled = false;
       signupBtn.innerText = 'Sign Up';
 
       localStorage.setItem('token', result.token);
       window.manualRoute('/images');
+      await getUserDetails();
       showToast('Signup Successful', true);
     },
     error: function (xhr, _, __) {
@@ -300,4 +314,35 @@ window.onload = function () {
 
   window.addEventListener('scroll', activeHeader);
   window.showToast = showToast;
+
+  getUserDetails();
 };
+
+async function getUserDetails() {
+  console.log('AUTH');
+  const token = localStorage.getItem('token');
+
+  try {
+    if (!token) throw new Error();
+
+    const response = await $.ajax({
+      url: `${BACKEND_URL}/profile`,
+      type: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      contentType: 'application/json',
+      dataType: 'json',
+    });
+
+    document.querySelector('li:has(#login-link)').classList.add('hidden');
+    document.querySelector('li:has(#signup-link)').classList.add('hidden');
+    document.querySelector('li:has(#profile-link)').classList.remove('hidden');
+
+    window.user = response;
+  } catch (err) {
+    document.querySelector('li:has(#login-link)').classList.remove('hidden');
+    document.querySelector('li:has(#signup-link)').classList.remove('hidden');
+    document.querySelector('li:has(#profile-link)').classList.add('hidden');
+  }
+}

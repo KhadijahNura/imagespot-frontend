@@ -133,24 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Authentication
 async function isAuthenticated() {
-  const token = localStorage.getItem('token');
-
-  if (!token) return false;
-
-  try {
-    const response = await $.ajax({
-      url: `${BACKEND_URL}/profile`,
-      type: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      contentType: 'application/json',
-      dataType: 'json',
-    });
-
-    window.user = response;
+  if (window.user) {
+    console.log(window.user);
     return true;
-  } catch (err) {
+  } else {
+    console.log('TOH');
     return false;
   }
 }
@@ -286,7 +273,10 @@ async function setupImagesPage(images) {
 }
 
 async function setupUploadsPage(images) {
+  document.getElementById('first_name').innerText = window.user.first_name;
+  document.getElementById('last_name').innerText = window.user.last_name;
   document.getElementById('username').innerText = window.user.username;
+  document.getElementById('email').innerText = window.user.email;
 
   const imagesCardContainer = document.querySelector('.image-cards-container');
   imagesCardContainer.innerHTML = '';
