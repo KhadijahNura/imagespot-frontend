@@ -289,10 +289,6 @@ function showToast(text, isSuccess) {
 }
 
 window.onload = async function () {
-  document.querySelector('li:has(#login-link)').classList.remove('hidden');
-  document.querySelector('li:has(#signup-link)').classList.remove('hidden');
-  document.querySelector('li:has(#profile-link)').classList.add('hidden');
-
   // mobile nav toggle
   const navbar = document.querySelector('[data-navbar]');
   const navToggler = document.querySelector('[data-nav-toggler]');
