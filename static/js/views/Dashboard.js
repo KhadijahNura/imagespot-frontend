@@ -122,21 +122,6 @@ export default class extends AbstractView {
                 beautiful, interesting, and meaningful images
               </p>
 
-              <ul class="about-list">
-                <li>
-                  <p class="list-text">
-                    <strong class="strong title-md">285+</strong> Image
-                    Downloads
-                  </p>
-                </li>
-
-                <li>
-                  <p class="list-text">
-                    <strong class="strong title-md">190+</strong> Happy Users
-                  </p>
-                </li>
-              </ul>
-
               <div class="wrapper">
                 <a href="/images" class="btn btn-primary" data-link>View Images</a>
 

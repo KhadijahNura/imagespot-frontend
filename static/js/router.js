@@ -9,8 +9,8 @@ import Profile from './views/Profile.js';
 import Signup from './views/Signup.js';
 import Upload from './views/Upload.js';
 
-const BACKEND_URL = 'https://imagespot-backend.onrender.com';
-// const BACKEND_URL = 'http://localhost:5000';
+// const BACKEND_URL = 'https://imagespot-backend.onrender.com';
+const BACKEND_URL = 'http://localhost:5000';
 
 const routes = [
   { path: '/', view: Dashboard },

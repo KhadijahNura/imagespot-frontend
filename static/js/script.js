@@ -1,7 +1,7 @@
 'use strict';
 
-const BACKEND_URL = 'https://imagespot-backend.onrender.com';
-// const BACKEND_URL = 'http://localhost:5000';
+// const BACKEND_URL = 'https://imagespot-backend.onrender.com';
+const BACKEND_URL = 'http://localhost:5000';
 
 function login() {
   const username = document.getElementById('username').value;
